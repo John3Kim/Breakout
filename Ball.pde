@@ -4,18 +4,18 @@ Ball class
 */
 
 class Ball { 
-  private float posX; 
-  private float posY; 
-  private float velocityX = 0; 
-  private float velocityY;
-  private float ballLength = width/60;
+  private float posX = width/2; 
+  private float posY = 10*height/11; 
+  private float velocityX = 1; 
+  private float velocityY = 1;
+  private float ballLength = width/50;
   
   Ball(){ 
-    
   }
   
   void displayBall(){ 
-    
+      fill(255);
+      rect(posX,posY,ballLength,ballLength);
   }
 
   void updateXPos(){ 
@@ -33,5 +33,6 @@ class Ball {
       velocityY = -velocityY; 
     } 
   } 
+  
   
 }
