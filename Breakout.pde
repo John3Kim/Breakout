@@ -3,6 +3,7 @@
 @author: John Kim(John3Kim)
 @desc: This is a simple implementation of the game 
 Breakout!
+     //TODO: Need to figure out how the bricks vanish!
 */
 
 Player player;
@@ -21,8 +22,23 @@ void setup(){
 void draw(){ 
   background(0);
   player.displayPaddle();
+  
+  bricks.displayBricks();
+
   ball.displayBall(); 
   ball.updateXPos(); 
   ball.updateYPos();
-  bricks.displayBricks();
+  
+  player.collisionDetection(ball);
+  bricks.brickVanish(ball);
+  //debugPosition();
+}
+
+//  Print out X and Y coordinates
+void debugPosition(){ 
+   //print("PlayerX: " + player.getYPosition() + "\n"); 
+   print("Mouse Y: " + mouseY + "\n");
+   print("Mouse X: " + mouseX + "\n"); 
+   //print("BallX: " + ball.getXPosition() + "\n");
+   //print("BallY: " + ball.getYPosition() + "\n");
 }

@@ -1,13 +1,15 @@
 /* 
 Ball class
 
+The class that controls the ball for the game
+
 */
 
 class Ball { 
   private float posX = width/2; 
   private float posY = 10*height/11; 
-  private float velocityX = 1; 
-  private float velocityY = 1;
+  private float velocityX = 5; 
+  private float velocityY = 5;
   private float ballLength = width/50;
   
   Ball(){ 
@@ -34,5 +36,28 @@ class Ball {
     } 
   } 
   
+  float getXPosition(){ 
+    return posX; 
+  }
+  
+  float getYPosition(){ 
+    return posY; 
+  }
+  
+  float getVelocityX(){ 
+    return velocityX;
+  }
+  
+  float getVelocityY(){ 
+    return velocityY;
+  }
+  
+  void setVelocityX(float velocity){ 
+     velocityX = velocity;
+  }
+  
+  void setVelocityY(float velocity){ 
+     velocityY = velocity;
+  }
   
 }
