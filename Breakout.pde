@@ -17,6 +17,7 @@ void setup(){
     player = new Player();
     ball = new Ball();
     bricks = new Bricks();
+    bricks.instantiateBricks();
 }
 
 void draw(){ 
