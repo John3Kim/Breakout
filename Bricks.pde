@@ -1,7 +1,7 @@
 /* Bricks.pde 
-* Description: This will display the bricks on the window
-* 
-* TODO: For each row, make bricks disappear after x number of hits! -> Convert brick appear from boolean to integers
+* Description: This will display the bricks on the window.
+* Players need to hit the bricks to make them disappear.
+* Depending on the what row the bricks lie in, the 
 */
 
 class Bricks{ 
@@ -35,8 +35,6 @@ class Bricks{
         for(int horizontal = 0; horizontal < numBricksHorizontal; horizontal++){
             xCoordinatesBrick[vertical][horizontal] = horizontal*width/16 + horizontal*21;
             yCoordinatesBrick[vertical][horizontal] = height/10 + vertical*height/25;
-            // Populate with numbers
-            //brickAppear[vertical][horizontal] = true;
             brickAppear[vertical][horizontal] = numBricksVertical - vertical;
         }
       }
@@ -49,12 +47,6 @@ class Bricks{
          fill(randomRed,randomGreen,randomBlue); 
         
          for(int horizontal = 0; horizontal < numBricksHorizontal; horizontal++){
-           // Check if the value is zero
-           /*
-           if(brickAppear[vertical][horizontal]){ 
-             rect(xCoordinatesBrick[vertical][horizontal],yCoordinatesBrick[vertical][horizontal],brickWidth,brickHeight);
-           }
-           */
            if(brickAppear[vertical][horizontal] > 0){ 
              rect(xCoordinatesBrick[vertical][horizontal],yCoordinatesBrick[vertical][horizontal],brickWidth,brickHeight);
            }
@@ -63,7 +55,7 @@ class Bricks{
    }
    
    // Make bricks vanish
-   void brickVanish(Ball ball){ 
+   void brickCollision(Ball ball){ 
      
      // Horizontal and vertical offsets
      float brickLeftSide = -brickWidth/2; 
@@ -87,11 +79,11 @@ class Bricks{
             
             if(collisionX && collisionY){ 
          
-               if(brickAppear[vertical][horizontal]){ 
+               if(brickAppear[vertical][horizontal] > 0){ 
                    ball.setVelocityY(-ball.getVelocityY());
+                   brickAppear[vertical][horizontal]--;
                }
-               // Check if the value is zero.
-               brickAppear[vertical][horizontal] = false;
+
             }
             
              //Reset offsets

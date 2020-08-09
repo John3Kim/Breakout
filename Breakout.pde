@@ -31,7 +31,7 @@ void draw(){
   ball.updateYPos();
   
   player.collisionDetection(ball);
-  bricks.brickVanish(ball);
+  bricks.brickCollision(ball);
   //debugPosition();
 }
 
