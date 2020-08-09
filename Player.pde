@@ -42,12 +42,15 @@ class Player extends Paddle{
        // Centre of the paddle 
        if(ball.getXPosition() == mouseX){ 
           ball.setVelocityX(xVelocityCollision);
+       
+       // Refactor this part
        //Left Half
        }else if(ball.getXPosition() > mouseX && ball.getXPosition() <= paddleLeftSideLength){ 
          xVelocityCollision = mouseX/50; 
          ball.setVelocityX(xVelocityCollision);
        // Right half
-       }else if(ball.getXPosition() < mouseX && ball.getXPosition() >= paddleRightSideLength){ 
+       }else if(ball.getXPosition() < mouseX && ball.getXPosition() >= paddleRightSideLength){
+         xVelocityCollision = mouseX/50;
          ball.setVelocityX(xVelocityCollision);
        }
 

@@ -1,7 +1,7 @@
 /* Bricks.pde 
 * Description: This will display the bricks on the window
 * 
-* TODO: For each row, make bricks disappear after x number of hits!
+* TODO: For each row, make bricks disappear after x number of hits! -> Convert brick appear from boolean to integers
 */
 
 class Bricks{ 
@@ -13,7 +13,8 @@ class Bricks{
    
    private float[][] xCoordinatesBrick = new float[numBricksVertical][numBricksHorizontal];
    private float[][] yCoordinatesBrick = new float[numBricksVertical][numBricksHorizontal];
-   private boolean[][] brickAppear = new boolean[numBricksVertical][numBricksHorizontal];
+   //private boolean[][] brickAppear = new boolean[numBricksVertical][numBricksHorizontal];
+   private int[][] brickAppear = new int[numBricksVertical][numBricksHorizontal];
    
    int randomRed = int(random(0,255));
    int randomGreen = int(random(0,255));
@@ -34,7 +35,9 @@ class Bricks{
         for(int horizontal = 0; horizontal < numBricksHorizontal; horizontal++){
             xCoordinatesBrick[vertical][horizontal] = horizontal*width/16 + horizontal*21;
             yCoordinatesBrick[vertical][horizontal] = height/10 + vertical*height/25;
-            brickAppear[vertical][horizontal] = true;
+            // Populate with numbers
+            //brickAppear[vertical][horizontal] = true;
+            brickAppear[vertical][horizontal] = numBricksVertical - vertical;
         }
       }
    }
@@ -46,7 +49,13 @@ class Bricks{
          fill(randomRed,randomGreen,randomBlue); 
         
          for(int horizontal = 0; horizontal < numBricksHorizontal; horizontal++){
+           // Check if the value is zero
+           /*
            if(brickAppear[vertical][horizontal]){ 
+             rect(xCoordinatesBrick[vertical][horizontal],yCoordinatesBrick[vertical][horizontal],brickWidth,brickHeight);
+           }
+           */
+           if(brickAppear[vertical][horizontal] > 0){ 
              rect(xCoordinatesBrick[vertical][horizontal],yCoordinatesBrick[vertical][horizontal],brickWidth,brickHeight);
            }
          }
@@ -81,7 +90,7 @@ class Bricks{
                if(brickAppear[vertical][horizontal]){ 
                    ball.setVelocityY(-ball.getVelocityY());
                }
-           
+               // Check if the value is zero.
                brickAppear[vertical][horizontal] = false;
             }
             
