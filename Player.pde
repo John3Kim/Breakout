@@ -1,5 +1,5 @@
 
-class Player extends Paddle{ 
+class Player{ 
   private float yPositionPaddle = 24*height/25;
   private float paddleLen = width/7;
   private float paddleHeight = height/30;
@@ -33,6 +33,9 @@ class Player extends Paddle{
      boolean collisionX = ball.getXPosition() >= paddleLeftSideLength && ball.getXPosition() <= paddleRightSideLength; 
      boolean collisionY = ball.getYPosition() >= paddleLowerSideLength && ball.getYPosition() <= paddleUpperSideLength;
      
+     boolean paddleLeftSideHit = ball.getXPosition() < mouseX && ball.getXPosition() >= paddleLeftSideLength;
+     boolean paddleRightSideHit = ball.getXPosition() > mouseX && ball.getXPosition() <= paddleRightSideLength;
+     
      if(collisionX && collisionY){ 
        
        // Y will always go the opposite direction
@@ -44,14 +47,10 @@ class Player extends Paddle{
           ball.setVelocityX(xVelocityCollision);
        
        // Refactor this part
-       //Left Half of the paddle
-       }else if(ball.getXPosition() < mouseX && ball.getXPosition() >= paddleLeftSideLength){ 
+       // hits the left or right side of the paddle
+       }else if(paddleLeftSideHit || paddleRightSideHit){ 
          xVelocityCollision = mouseX/50; 
-         ball.setVelocityX(-xVelocityCollision);
-       // Right half of the paddle
-       }else if(ball.getXPosition() > mouseX && ball.getXPosition() <= paddleRightSideLength){
-         xVelocityCollision = mouseX/50;
-         ball.setVelocityX(-xVelocityCollision);
+         ball.setVelocityX(xVelocityCollision);
        }
        
      }

@@ -1,7 +1,9 @@
 /* Bricks.pde 
 * Description: This will display the bricks on the window.
 * Players need to hit the bricks to make them disappear.
-* Depending on the what row the bricks lie in, the 
+* 
+* TODO: Implement collision detection for when the ball hits the sides 
+* of the bricks instead of the tops and bottoms
 */
 
 class Bricks{ 
@@ -13,7 +15,6 @@ class Bricks{
    
    private float[][] xCoordinatesBrick = new float[numBricksVertical][numBricksHorizontal];
    private float[][] yCoordinatesBrick = new float[numBricksVertical][numBricksHorizontal];
-   //private boolean[][] brickAppear = new boolean[numBricksVertical][numBricksHorizontal];
    private int[][] brickAppear = new int[numBricksVertical][numBricksHorizontal];
    
    int randomRed = int(random(0,255));
@@ -64,20 +65,23 @@ class Bricks{
      float brickUpperSide = brickHeight/2; 
      float brickLowerSide = -brickHeight/2;
      
-     boolean collisionX, collisionY;
+     // Collisions
+     boolean collisionXHorizontal, collisionYHorizontal;
      
+     // Need to check for individual bricks
      for(int vertical = 0; vertical < numBricksVertical; vertical++){ 
         for(int horizontal = 0; horizontal < numBricksHorizontal; horizontal++){
+            // For the horizontal collisions
             brickLeftSide += xCoordinatesBrick[vertical][horizontal]; 
             brickRightSide += xCoordinatesBrick[vertical][horizontal]; 
      
             brickUpperSide += yCoordinatesBrick[vertical][horizontal]; 
             brickLowerSide += yCoordinatesBrick[vertical][horizontal];
             
-            collisionX = ball.getXPosition() >= brickLeftSide && ball.getXPosition() <= brickRightSide; 
-            collisionY = ball.getYPosition() >= brickLowerSide && ball.getYPosition() <= brickUpperSide;
+            collisionXHorizontal = ball.getXPosition() >= brickLeftSide && ball.getXPosition() <= brickRightSide; 
+            collisionYHorizontal = ball.getYPosition() >= brickLowerSide && ball.getYPosition() <= brickUpperSide;
             
-            if(collisionX && collisionY){ 
+            if(collisionXHorizontal && collisionYHorizontal){ 
          
                if(brickAppear[vertical][horizontal] > 0){ 
                    ball.setVelocityY(-ball.getVelocityY());
